@@ -18,6 +18,10 @@ class NotesModel extends BaseModel{
   String _color;
 
 
+  NotesModel(){
+    this.stackIndex = 0;
+  }
+
   String get color => _color;
 
   set color(String someColor){

@@ -29,11 +29,12 @@ class NotesDBWorker{
       onOpen: (db){},
       onCreate: (Database someDB, int someVersion)async{
         await someDB.execute(
-          "CREATE TABLE IF NOT EXIST notes("
-          "id INTEGER PRIMARY KEY,"
+          "CREATE TABLE IF NOT EXISTS notes("
+          "id INTEGER UNIQUE PRIMARY KEY,"
           "title TEXT,"
           "content TEXT,"
           "color TEXT"
+              ")"
         );
       }
     );
@@ -69,13 +70,13 @@ class NotesDBWorker{
 
     Database db = await _database;
     var val = await db.rawQuery(
-      "SELECT MAX(id) +1 FROM notes"
+      "SELECT MAX(id) + 1 AS id FROM notes"
     );
 
-    int id = val.first['id'] != null ? val.first['id'] : 1;
+    int id = val.first['id'] == null ? 1 : val.first['id'];
 
     return await db.rawInsert(
-      "INSERT INTO notes (id, title, content, color) "
+      "INSERT INTO notes (id, title, content, color)"
       "VALUES (?,?,?,?)",
       [id, someNote.title, someNote.content, someNote.color]
     );

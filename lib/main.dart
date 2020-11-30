@@ -9,19 +9,21 @@ import "utils.dart" as utils;
 
 void main(){
   startMeUp() async{
-    Directory docsDir = await getApplicationDocumentsDirectory();
+    Directory doscDir = await getApplicationDocumentsDirectory();
+    utils.docsDir = doscDir;
 
+    runApp(MaterialApp(
+      title: 'FlutterBook',
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: FlutterBook(),
+    )
+    );
   }
-
-  runApp(MaterialApp(
-    title: 'FlutterBook',
-    theme: ThemeData(
-      primarySwatch: Colors.blueGrey,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-    ),
-    home: FlutterBook(),
-  )
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  startMeUp();
 }
 
 class FlutterBook extends StatelessWidget {
@@ -58,10 +60,10 @@ class FlutterBook extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Appointments(),
-              Contacts(),
+              Text('Appointments entity under construction'),
+              Text('Contacts entity under construction'),
               Notes(),
-              Tasks()
+              Text(utils.docsDir.path),
             ],
           ),
         ),
