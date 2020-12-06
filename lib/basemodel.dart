@@ -1,9 +1,10 @@
+import 'package:flutter_book/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class BaseModel extends Model{
 
   int _stackIndex;
-  List _entityList = [];
+  List<dynamic> _entityList = [];
   var entityBeingEdited;
   String _chosenDate;
 
@@ -21,8 +22,18 @@ class BaseModel extends Model{
     notifyListeners();
   }
 
-  void loadData(String someEntityType, dynamic someDatabase) async{
-    _entityList = await someDatabase.getAll();
+
+  void loadData(String entityType, dynamic db) async{
+    _entityList = await db.getAll();
+
+   /* if(table == DbTable.NOTES){
+      _entityList = await db.getAll(table: DbTable.NOTES);
+    }
+
+    if(table == DbTable.TASKS){
+      _entityList = await db.getAll(table: DbTable.TASKS);
+    }*/
+
     notifyListeners();
   }
 

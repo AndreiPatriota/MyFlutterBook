@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/tasks/tasksmodel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'notesdbworker.dart';
 import 'notesmodel.dart' show Note, NotesModel, theNotesModel;
+//import '../dbworker.dart';
 
 class NotesList extends StatelessWidget {
 
@@ -65,7 +67,11 @@ class NotesList extends StatelessWidget {
                   body: ListView.builder(
                       itemCount: someModel.entityList.length,
                       itemBuilder: (BuildContext someContext, int someIndex) {
-                        Note oneNote = someModel.entityList[someIndex];
+                        var oneNote = theNotesModel.entityList[someIndex];
+                        if(oneNote.runtimeType == Task){
+                          theNotesModel.loadData('notes',NotesDBWorker.db);
+                        }
+
                         Color oneColor = Colors.white;
 
                         switch (oneNote.color) {
@@ -109,7 +115,6 @@ class NotesList extends StatelessWidget {
                                 title: Text('${oneNote.title}; id:${oneNote.id}'),
                                 subtitle: Text('${oneNote.content}'),
                                 onTap: () async {
-                                  print('Ponto E');
                                   someModel.entityBeingEdited =
                                   await NotesDBWorker.db.get(someIndex + 1);
                                   someModel.color =

@@ -1,5 +1,6 @@
 import 'package:flutter_book/notes/notes.dart';
 import '../basemodel.dart' show BaseModel;
+import '../dbworker.dart';
 
 class Note{
 
@@ -20,6 +21,7 @@ class NotesModel extends BaseModel{
 
   NotesModel(){
     this.stackIndex = 0;
+    this.entityBeingEdited = Note();
   }
 
   String get color => _color;
