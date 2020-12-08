@@ -23,8 +23,8 @@ class BaseModel extends Model{
   }
 
 
-  void loadData(String entityType, dynamic db) async{
-    _entityList = await db.getAll();
+  void loadData(DBTable table, DBWorker db) async{
+    _entityList = await db.getAll(table: table);
 
    /* if(table == DbTable.NOTES){
       _entityList = await db.getAll(table: DbTable.NOTES);

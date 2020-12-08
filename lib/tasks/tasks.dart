@@ -10,7 +10,7 @@ class Tasks extends StatelessWidget{
 
   Tasks(){
     print('Hello from tasks model');
-    theTasksModel.loadData('tasks', TasksDBWorker.db);
+    theTasksModel.loadData(DBTable.TASKS, DBWorker.db);
   }
 
   @override

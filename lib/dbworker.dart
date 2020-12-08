@@ -6,7 +6,7 @@ import 'notes/notesmodel.dart';
 import 'utils.dart' as utils;
 
 
-enum DbTable {NOTES, TASKS, APPOINTMENTS, CONTACTS}
+enum DBTable {NOTES, TASKS, APPOINTMENTS, CONTACTS}
 
 class DBWorker{
 
@@ -14,17 +14,17 @@ class DBWorker{
 
   static final db = DBWorker._();
   Database _db;
-  DbTable _table;
+  DBTable _table;
 
 
   String get _tableName{
     var tableName = '';
 
     switch(_table){
-      case DbTable.NOTES: tableName = 'notes'; break;
-      case DbTable.TASKS: tableName = 'tasks'; break;
-      case DbTable.APPOINTMENTS: tableName = 'appointments'; break;
-      case DbTable.CONTACTS: tableName = 'contacts'; break;
+      case DBTable.NOTES: tableName = 'notes'; break;
+      case DBTable.TASKS: tableName = 'tasks'; break;
+      case DBTable.APPOINTMENTS: tableName = 'appointments'; break;
+      case DBTable.CONTACTS: tableName = 'contacts'; break;
     }
 
     return tableName;
@@ -42,33 +42,34 @@ class DBWorker{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'database1.db');
+    var path = join(utils.docsDir.path, 'database2.db');
     Database db = await openDatabase(
         path,
-        version: 2,
+        version: 1,
         onOpen: (db){},
+        onCreate: (Database someDB, int someVersion)async{
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS notes("
+                  "id INTEGER UNIQUE PRIMARY KEY,"
+                  "title TEXT,"
+                  "content TEXT,"
+                  "color TEXT"
+                  ")");
+
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS tasks("
+                  "id INTEGER UNIQUE PRIMARY KEY,"
+                  "description TEXT,"
+                  "completed TEXT,"
+                  "dueDate TEXT"
+                  ")");
+        }
     );
-
-    await db.execute(
-        "CREATE TABLE IF NOT EXISTS notes("
-            "id INTEGER UNIQUE PRIMARY KEY,"
-            "title TEXT,"
-            "content TEXT,"
-            "color TEXT"
-            ")");
-
-    await db.execute(
-        "CREATE TABLE IF NOT EXISTS tasks("
-            "id INTEGER UNIQUE PRIMARY KEY,"
-            "description TEXT,"
-            "completed TEXT,"
-            "dueDate TEXT"
-            ")");
 
     return db;
   }
 
-  Future<void> create({@required DbTable table, @required dynamic record})async{
+  Future<void> create({@required DBTable table, @required dynamic record})async{
 
     Database db = await _database;
     _table = table;
@@ -77,18 +78,16 @@ class DBWorker{
         "SELECT MAX(id) + 1 AS id FROM " + _tableName
     );
 
-    print(_tableName);
-
     int id = val.first['id'] == null ? 1 : val.first['id'];
 
     switch(_table){
-      case DbTable.NOTES: await db.rawInsert(
+      case DBTable.NOTES: await db.rawInsert(
           "INSERT INTO notes (id, title, content, color)"
               "VALUES (?,?,?,?)",
           [id, record.title, record.content, record.color]
           );break;
 
-      case DbTable.TASKS: await db.rawInsert(
+      case DBTable.TASKS: await db.rawInsert(
           "INSERT INTO tasks (id, description, completed, dueDate)"
               "VALUES (?,?,?,?)",
           [id, record.description, record.completed, record.dueDate]
@@ -98,7 +97,7 @@ class DBWorker{
 
   }
 
-  Future<dynamic> get({@required DbTable table, @required int idx})async{
+  Future<dynamic> get({@required DBTable table, @required int idx})async{
 
     Database db = await _database;
     _table = table;
@@ -109,10 +108,10 @@ class DBWorker{
         whereArgs: [idx]
     );
 
-    return _map2Record(resSet.first);
+    return this._map2Record(resSet.first);
   }
 
-  Future<List> getAll({@required DbTable table}) async {
+  Future<List> getAll({@required DBTable table}) async {
 
     Database db = await _database;
     _table = table;
@@ -121,28 +120,28 @@ class DBWorker{
         _tableName
     );
 
-    if(table == DbTable.TASKS){
+    if(table == DBTable.TASKS){
       print(resSet);
     }
 
     return resSet.isNotEmpty?
-    resSet.map((inputElem)=>_map2Record(inputElem)).toList():[];
+    resSet.map((inputElem)=>this._map2Record(inputElem)).toList():[];
   }
 
-  Future<void> update({@required DbTable table, @required dynamic record}) async {
+  Future<void> update({@required DBTable table, @required dynamic record}) async {
 
     Database db = await _database;
     _table = table;
 
     return await db.update(
         _tableName,
-        _record2Map(record),
+        this._record2Map(record),
         where: 'id=?',
         whereArgs: [record.id]
     );
   }
 
-  Future<void> delete({@required DbTable table, @required int idx}) async {
+  Future<void> delete({@required DBTable table, @required int idx}) async {
 
     Database db = await _database;
     _table = table;
@@ -159,14 +158,14 @@ class DBWorker{
     var record;
 
     switch(_table){
-      case DbTable.NOTES: record = Note();
+      case DBTable.NOTES: record = Note();
                     record.id = inMap['id'];
                     record.title = inMap['title'];
                     record.color = inMap['color'];
                     record.content = inMap['content'];
                     break;
 
-      case DbTable.TASKS: record = Task();
+      case DBTable.TASKS: record = Task();
                     record.id = inMap['id'];
                     record.description = inMap['description'];
                     record.dueDate = inMap['dueDate'];
@@ -183,13 +182,13 @@ class DBWorker{
     Map<String, dynamic> map = Map<String, dynamic>();
 
     switch(_table){
-      case DbTable.NOTES: map['id'] = record.id;
+      case DBTable.NOTES: map['id'] = record.id;
                           map['title'] = record.title;
                           map['color'] = record.color;
                           map['content'] = record.content;
                           break;
 
-      case DbTable.TASKS: map['id'] = record.id;
+      case DBTable.TASKS: map['id'] = record.id;
                           map['description'] = record.description;
                           map['dueDate'] = record.dueDate;
                           map['completed'] = record.completed;

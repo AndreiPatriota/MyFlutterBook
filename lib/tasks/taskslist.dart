@@ -26,7 +26,7 @@ class TasksList extends StatelessWidget{
                   ),
                   FlatButton(
                       onPressed: ()async{
-                        await TasksDBWorker.db.delete(someTask.id); // Updates the DB
+                        await DBWorker.db.delete(table: DBTable.TASKS, idx: someTask.id); // Updates the DB
                         Navigator.of(anotherContext).pop();//Closes pop-up
                         //Shows the SnackBar
                         Scaffold.of(someContext).showSnackBar(
@@ -36,7 +36,7 @@ class TasksList extends StatelessWidget{
                               duration: Duration(seconds: 2),
                             )
                         );
-                        theTasksModel.loadData('tasks', TasksDBWorker.db);//Updates the model according to the DB
+                        theTasksModel.loadData(DBTable.TASKS, DBWorker.db);//Updates the model according to the DB
                       },
                       child: Text('Delete')
                   )
@@ -84,8 +84,8 @@ class TasksList extends StatelessWidget{
                           value: oneTask.completed == 'true'?true:false,
                           onChanged: (bool checkBoxVal)async{
                             oneTask.completed = checkBoxVal.toString();
-                            await TasksDBWorker.db.update(oneTask);
-                            someModel.loadData('tasks', TasksDBWorker.db);
+                            await DBWorker.db.update(table: DBTable.TASKS, record: oneTask);
+                            someModel.loadData(DBTable.TASKS, DBWorker.db);
                           },
                         ),
                         title: Text(
@@ -116,7 +116,7 @@ class TasksList extends StatelessWidget{
                           if(oneTask.completed == 'true'){return;}
                           
                           someModel.entityBeingEdited =
-                          await TasksDBWorker.db.get(oneTask.id);
+                          await DBWorker.db.get(table: DBTable.TASKS, idx: oneTask.id);
                           if(someModel.entityBeingEdited.dueDate == null){
                             someModel.chosenDate = null;  
                           }else{

@@ -25,12 +25,14 @@ class TasksEntry extends StatelessWidget{
 
     //Update DB
     if(inModel.entityBeingEdited.id == null){
-      await TasksDBWorker.db.create(inModel.entityBeingEdited);
+      await DBWorker.db.create(table: DBTable.TASKS,
+                               record: inModel.entityBeingEdited);
     }else{
-      await TasksDBWorker.db.update(inModel.entityBeingEdited);
+      await DBWorker.db.update(table: DBTable.TASKS,
+                               record: inModel.entityBeingEdited);
     }
     //Update Model and return to TasksList View
-    inModel.loadData('tasks', TasksDBWorker.db);
+    inModel.loadData(DBTable.TASKS, DBWorker.db);
     inModel.chosenDate = null;
     inModel.stackIndex = 0;
     //Show SnackBar

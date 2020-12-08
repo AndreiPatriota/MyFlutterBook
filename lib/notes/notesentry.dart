@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import '../dbworker.dart';
 import 'notesdbworker.dart';
 //import '../dbworker.dart';
 import 'notesmodel.dart' show NotesModel, theNotesModel;
@@ -28,12 +29,14 @@ class NotesEntry extends StatelessWidget{
     if(!_formKey.currentState.validate()){return;}
 
     if(inModel.entityBeingEdited.id == null){
-      await NotesDBWorker.db.create(inModel.entityBeingEdited);
+      await DBWorker.db.create(table: DBTable.NOTES,
+                               record: inModel.entityBeingEdited);
     }else{
-      await NotesDBWorker.db.update(inModel.entityBeingEdited);
+      await DBWorker.db.update(table: DBTable.NOTES,
+                               record: inModel.entityBeingEdited);
     }
 
-    inModel.loadData('notes',NotesDBWorker.db);
+    inModel.loadData(DBTable.NOTES,DBWorker.db);
     inModel.stackIndex = 0;
 
     Scaffold.of(inContext).showSnackBar(
