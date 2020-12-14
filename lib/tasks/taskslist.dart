@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_book/tasks/tasksdbworker.dart';
+import 'package:flutter_book/db/tasksdbworker.dart';
 import 'package:flutter_book/tasks/tasksmodel.dart' show TasksModel, theTasksModel, Task;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../dbworker.dart';
+import '../db/dbworker.dart';
 
 class TasksList extends StatelessWidget{
 
@@ -26,7 +26,7 @@ class TasksList extends StatelessWidget{
                   ),
                   FlatButton(
                       onPressed: ()async{
-                        await DBWorker.db.delete(table: DBTable.TASKS, idx: someTask.id); // Updates the DB
+                        await DBWorker.db.tasks.delete(someTask.id); // Updates the DB
                         Navigator.of(anotherContext).pop();//Closes pop-up
                         //Shows the SnackBar
                         Scaffold.of(someContext).showSnackBar(
@@ -36,7 +36,7 @@ class TasksList extends StatelessWidget{
                               duration: Duration(seconds: 2),
                             )
                         );
-                        theTasksModel.loadData(DBTable.TASKS, DBWorker.db);//Updates the model according to the DB
+                        theTasksModel.loadData('tasks', DBWorker.db);//Updates the model according to the DB
                       },
                       child: Text('Delete')
                   )
@@ -84,8 +84,8 @@ class TasksList extends StatelessWidget{
                           value: oneTask.completed == 'true'?true:false,
                           onChanged: (bool checkBoxVal)async{
                             oneTask.completed = checkBoxVal.toString();
-                            await DBWorker.db.update(table: DBTable.TASKS, record: oneTask);
-                            someModel.loadData(DBTable.TASKS, DBWorker.db);
+                            await DBWorker.db.tasks.update(oneTask);
+                            someModel.loadData('tasks', DBWorker.db);
                           },
                         ),
                         title: Text(
@@ -116,7 +116,7 @@ class TasksList extends StatelessWidget{
                           if(oneTask.completed == 'true'){return;}
                           
                           someModel.entityBeingEdited =
-                          await DBWorker.db.get(table: DBTable.TASKS, idx: oneTask.id);
+                          await DBWorker.db.tasks.get(oneTask.id);
                           if(someModel.entityBeingEdited.dueDate == null){
                             someModel.chosenDate = null;  
                           }else{

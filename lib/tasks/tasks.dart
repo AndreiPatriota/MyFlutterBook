@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'tasksdbworker.dart';
+import '../db/tasksdbworker.dart';
 import 'taskslist.dart';
 import 'tasksentry.dart';
 import 'tasksmodel.dart' show TasksModel, theTasksModel;
-import '../dbworker.dart';
+import '../db/dbworker.dart';
 
 class Tasks extends StatelessWidget{
 
   Tasks(){
     print('Hello from tasks model');
-    theTasksModel.loadData(DBTable.TASKS, DBWorker.db);
+    theTasksModel.loadData('tasks', DBWorker.db);
   }
 
   @override

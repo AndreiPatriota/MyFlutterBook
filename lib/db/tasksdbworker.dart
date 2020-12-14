@@ -1,15 +1,14 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
-import 'tasksmodel.dart';
+import '../tasks/tasksmodel.dart';
 
 class TasksDBWorker{
 
-  TasksDBWorker._();
-  static final TasksDBWorker db = TasksDBWorker._();
-
   Database _db;
 
+
+  TasksDBWorker();
 
   Future<Database> get _database async{
 
@@ -22,7 +21,7 @@ class TasksDBWorker{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'tasks.db');
+    var path = join(utils.docsDir.path, 'my1.db');
     Database db = await openDatabase(
         path,
         version: 1,

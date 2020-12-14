@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book/tasks/tasksmodel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../dbworker.dart';
-import 'notesdbworker.dart';
+import '../db/dbworker.dart';
+import '../db/notesdbworker.dart';
 import 'notesmodel.dart' show Note, NotesModel, theNotesModel;
 //import '../dbworker.dart';
 
@@ -27,7 +27,7 @@ class NotesList extends StatelessWidget {
                 ),
                 FlatButton(
                     onPressed: ()async{
-                      await DBWorker.db.delete(table: DBTable.NOTES, idx: someNote.id);
+                      await DBWorker.db.notes.delete(someNote.id);
                       Navigator.of(anotherContext).pop();
 
                       Scaffold.of(someContext).showSnackBar(
@@ -37,7 +37,7 @@ class NotesList extends StatelessWidget {
                           duration: Duration(seconds: 2),
                         )
                       );
-                      theNotesModel.loadData(DBTable.NOTES, DBWorker.db);
+                      theNotesModel.loadData('notes', DBWorker.db);
                     },
                     child: Text('Delete')
                 )
@@ -70,7 +70,7 @@ class NotesList extends StatelessWidget {
                       itemBuilder: (BuildContext someContext, int someIndex) {
                         var oneNote = theNotesModel.entityList[someIndex];
                         if(oneNote.runtimeType == Task){
-                          theNotesModel.loadData(DBTable.NOTES,DBWorker.db);
+                          theNotesModel.loadData('notes',DBWorker.db);
                         }
 
                         Color oneColor = Colors.white;
@@ -117,7 +117,7 @@ class NotesList extends StatelessWidget {
                                 subtitle: Text('${oneNote.content}'),
                                 onTap: () async {
                                   someModel.entityBeingEdited =
-                                  await DBWorker.db.get(table: DBTable.NOTES, idx: someIndex + 1);
+                                  await DBWorker.db.notes.get(someIndex + 1);
                                   someModel.color =
                                       someModel.entityBeingEdited.color;
                                   someModel.stackIndex = 1;

@@ -1,4 +1,4 @@
-import 'package:flutter_book/dbworker.dart';
+import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class BaseModel extends Model{
@@ -23,16 +23,12 @@ class BaseModel extends Model{
   }
 
 
-  void loadData(DBTable table, DBWorker db) async{
-    _entityList = await db.getAll(table: table);
+  void loadData(String table, DBWorker db) async{
 
-   /* if(table == DbTable.NOTES){
-      _entityList = await db.getAll(table: DbTable.NOTES);
+    switch(table){
+      case 'notes': _entityList = await db.notes.getAll();break;
+      case 'tasks': _entityList = await db.tasks.getAll();break;
     }
-
-    if(table == DbTable.TASKS){
-      _entityList = await db.getAll(table: DbTable.TASKS);
-    }*/
 
     notifyListeners();
   }

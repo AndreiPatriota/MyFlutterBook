@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_book/dbworker.dart';
+import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'tasksdbworker.dart';
 import 'tasksmodel.dart' show TasksModel, theTasksModel;
 import '../utils.dart' show selectDate;
 
@@ -25,14 +24,12 @@ class TasksEntry extends StatelessWidget{
 
     //Update DB
     if(inModel.entityBeingEdited.id == null){
-      await DBWorker.db.create(table: DBTable.TASKS,
-                               record: inModel.entityBeingEdited);
+      await DBWorker.db.tasks.create(inModel.entityBeingEdited);
     }else{
-      await DBWorker.db.update(table: DBTable.TASKS,
-                               record: inModel.entityBeingEdited);
+      await DBWorker.db.tasks.update(inModel.entityBeingEdited);
     }
     //Update Model and return to TasksList View
-    inModel.loadData(DBTable.TASKS, DBWorker.db);
+    inModel.loadData('tasks', DBWorker.db);
     inModel.chosenDate = null;
     inModel.stackIndex = 0;
     //Show SnackBar
