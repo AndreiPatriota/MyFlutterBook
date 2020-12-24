@@ -22,18 +22,8 @@ class BaseModel extends Model{
     notifyListeners();
   }
 
-
   void loadData(String entityType, dynamic db) async{
     _entityList = await db.getAll();
-
-   /* if(table == DbTable.NOTES){
-      _entityList = await db.getAll(table: DbTable.NOTES);
-    }
-
-    if(table == DbTable.TASKS){
-      _entityList = await db.getAll(table: DbTable.TASKS);
-    }*/
-
     notifyListeners();
   }
 

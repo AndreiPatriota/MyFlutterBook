@@ -60,7 +60,7 @@ class FlutterBook extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Text('Appointments entity under construction'),
+              Appointments(),
               Text('Contacts entity under construction'),
               Notes(),
               Tasks(),
