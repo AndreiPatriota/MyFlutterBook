@@ -5,7 +5,7 @@ import 'taskslist.dart';
 import 'tasksentry.dart';
 import 'tasksmodel.dart' show TasksModel, theTasksModel;
 import '../db/dbworker.dart';
-
+/*
 class Tasks extends StatelessWidget{
 
   Tasks(){
@@ -27,4 +27,4 @@ class Tasks extends StatelessWidget{
                 ),
           )
       );
-}
+}*/

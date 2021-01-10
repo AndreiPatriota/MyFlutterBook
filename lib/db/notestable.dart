@@ -3,25 +3,26 @@ import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
 import '../notes/notesmodel.dart';
 
-class NotesDBWorker{
+class NotesTable{
 
   Database _db;
 
-
-  NotesDBWorker();
+  NotesTable(Database db){
+    _db = db;
+  }
 
   Future<Database> get _database async{
 
     if(_db == null){
       _db = await _init();
     }
-
+    
     return _db;
   }
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'my.db');
+    var path = join(utils.docsDir.path, 'myFucking.db');
     Database db = await openDatabase(
       path,
       version: 1,

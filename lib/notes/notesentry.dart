@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../db/dbworker.dart';
-import '../db/notesdbworker.dart';
-//import '../dbworker.dart';
 import 'notesmodel.dart' show NotesModel, theNotesModel;
+import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 
 class NotesEntry extends StatelessWidget{
 
@@ -34,7 +33,7 @@ class NotesEntry extends StatelessWidget{
       await DBWorker.db.notes.update(inModel.entityBeingEdited);
     }
 
-    inModel.loadData('notes',DBWorker.db);
+    inModel.loadData('notes',DBWorker.db.notes);
     inModel.stackIndex = 0;
 
     Scaffold.of(inContext).showSnackBar(

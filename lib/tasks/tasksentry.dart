@@ -3,7 +3,7 @@ import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'tasksmodel.dart' show TasksModel, theTasksModel;
 import '../utils.dart' show selectDate;
-
+/*
 class TasksEntry extends StatelessWidget{
 
   final TextEditingController _descriptionEditingController = TextEditingController();
@@ -116,4 +116,4 @@ class TasksEntry extends StatelessWidget{
     );
   }
 
-}
+}*/

@@ -21,14 +21,9 @@ class BaseModel extends Model{
     _stackIndex = someStackIndex;
     notifyListeners();
   }
-
-
-  void loadData(String table, DBWorker db) async{
-
-    switch(table){
-      case 'notes': _entityList = await db.notes.getAll();break;
-      case 'tasks': _entityList = await db.tasks.getAll();break;
-    }
+  
+  void loadData(String tableName, dynamic table) async{
+    _entityList = await table.getAll();
 
     notifyListeners();
   }

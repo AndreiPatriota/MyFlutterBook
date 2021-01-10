@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book/tasks/tasksmodel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../db/dbworker.dart';
-import '../db/notesdbworker.dart';
 import 'notesmodel.dart' show Note, NotesModel, theNotesModel;
-//import '../dbworker.dart';
+import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 
 class NotesList extends StatelessWidget {
 
@@ -37,7 +35,7 @@ class NotesList extends StatelessWidget {
                           duration: Duration(seconds: 2),
                         )
                       );
-                      theNotesModel.loadData('notes', DBWorker.db);
+                      theNotesModel.loadData('notes', DBWorker.db.notes);
                     },
                     child: Text('Delete')
                 )
@@ -69,9 +67,6 @@ class NotesList extends StatelessWidget {
                       itemCount: someModel.entityList.length,
                       itemBuilder: (BuildContext someContext, int someIndex) {
                         var oneNote = theNotesModel.entityList[someIndex];
-                        if(oneNote.runtimeType == Task){
-                          theNotesModel.loadData('notes',DBWorker.db);
-                        }
 
                         Color oneColor = Colors.white;
 

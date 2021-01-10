@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_book/db/notesdbworker.dart';
+import 'package:flutter_book/db/notestable.dart';
 import 'package:flutter_book/db/tasksdbworker.dart';
 import 'package:flutter_book/tasks/tasksmodel.dart';
 import 'package:path/path.dart';
@@ -10,15 +10,14 @@ import '../utils.dart' as utils;
 
 class DBWorker{
 
-  NotesDBWorker notes;
-  TasksDBWorker tasks;
+  Database _db;
+  NotesTable notes;
+
 
   DBWorker._(){
-    notes = NotesDBWorker();
-    tasks = TasksDBWorker();
+    notes = NotesTable(_db);
   }
 
   static final db = DBWorker._();
-
 
 }

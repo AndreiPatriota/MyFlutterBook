@@ -6,7 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../db/dbworker.dart';
-
+/*
 class TasksList extends StatelessWidget{
 
   void _deleteTask(BuildContext someContext, Task someTask) =>
@@ -145,3 +145,4 @@ class TasksList extends StatelessWidget{
       );
 
 }
+*/
