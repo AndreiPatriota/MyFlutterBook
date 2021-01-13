@@ -66,7 +66,7 @@ class NotesList extends StatelessWidget {
                   body: ListView.builder(
                       itemCount: someModel.entityList.length,
                       itemBuilder: (BuildContext someContext, int someIndex) {
-                        var oneNote = theNotesModel.entityList[someIndex];
+                        Note oneNote = theNotesModel.entityList[someIndex];
 
                         Color oneColor = Colors.white;
 
@@ -112,7 +112,7 @@ class NotesList extends StatelessWidget {
                                 subtitle: Text('${oneNote.content}'),
                                 onTap: () async {
                                   someModel.entityBeingEdited =
-                                  await DBWorker.db.notes.get(someIndex + 1);
+                                  await DBWorker.db.notes.get(oneNote.id);
                                   someModel.color =
                                       someModel.entityBeingEdited.color;
                                   someModel.stackIndex = 1;
