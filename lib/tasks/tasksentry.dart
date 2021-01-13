@@ -3,7 +3,7 @@ import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'tasksmodel.dart' show TasksModel, theTasksModel;
 import '../utils.dart' show selectDate;
-/*
+
 class TasksEntry extends StatelessWidget{
 
   final TextEditingController _descriptionEditingController = TextEditingController();
@@ -29,7 +29,7 @@ class TasksEntry extends StatelessWidget{
       await DBWorker.db.tasks.update(inModel.entityBeingEdited);
     }
     //Update Model and return to TasksList View
-    inModel.loadData('tasks', DBWorker.db);
+    inModel.loadData('tasks', DBWorker.db.tasks);
     inModel.chosenDate = null;
     inModel.stackIndex = 0;
     //Show SnackBar
@@ -116,4 +116,4 @@ class TasksEntry extends StatelessWidget{
     );
   }
 
-}*/
+}

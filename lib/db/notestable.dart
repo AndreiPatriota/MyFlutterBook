@@ -22,12 +22,15 @@ class NotesTable{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'myFucking.db');
+    var path = join(utils.docsDir.path, 'myFucking1.db');
     Database db = await openDatabase(
       path,
       version: 1,
       onOpen: (db){},
       onCreate: (Database someDB, int someVersion)async{
+
+        print('Database created!!!!!!!!!!!');
+
         await someDB.execute(
           "CREATE TABLE IF NOT EXISTS notes("
           "id INTEGER UNIQUE PRIMARY KEY,"
@@ -36,6 +39,16 @@ class NotesTable{
           "color TEXT"
               ")"
         );
+
+        await someDB.execute(
+            "CREATE TABLE IF NOT EXISTS tasks("
+                "id INTEGER UNIQUE PRIMARY KEY,"
+                "description TEXT,"
+                "completed TEXT,"
+                "dueDate TEXT"
+                ")"
+        );
+
       }
     );
 

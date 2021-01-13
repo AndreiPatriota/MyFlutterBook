@@ -63,7 +63,7 @@ class FlutterBook extends StatelessWidget {
               Text('Appointments entity under construction'),
               Text('Contacts entity under construction'),
               Notes(),
-              Text('Tasks entity under construction'),
+              Tasks(),
             ],
           ),
         ),

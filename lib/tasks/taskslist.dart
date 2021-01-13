@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_book/db/tasksdbworker.dart';
+import 'package:flutter_book/db/taskstable.dart';
 import 'package:flutter_book/tasks/tasksmodel.dart' show TasksModel, theTasksModel, Task;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../db/dbworker.dart';
-/*
+
 class TasksList extends StatelessWidget{
 
   void _deleteTask(BuildContext someContext, Task someTask) =>
@@ -36,7 +36,7 @@ class TasksList extends StatelessWidget{
                               duration: Duration(seconds: 2),
                             )
                         );
-                        theTasksModel.loadData('tasks', DBWorker.db);//Updates the model according to the DB
+                        theTasksModel.loadData('tasks', DBWorker.db.tasks);//Updates the model according to the DB
                       },
                       child: Text('Delete')
                   )
@@ -73,7 +73,7 @@ class TasksList extends StatelessWidget{
                       List dateParts = oneTask.dueDate.split(',');
                       dueDate = DateTime(int.parse(dateParts[0]),
                                          int.parse(dateParts[1]),
-                                         int.parse(dateParts[1]));
+                                         int.parse(dateParts[2]));
                       strDueDate = DateFormat.yMMMMd('en_US').format(dueDate.toLocal());
                     }
 
@@ -85,7 +85,7 @@ class TasksList extends StatelessWidget{
                           onChanged: (bool checkBoxVal)async{
                             oneTask.completed = checkBoxVal.toString();
                             await DBWorker.db.tasks.update(oneTask);
-                            someModel.loadData('tasks', DBWorker.db);
+                            someModel.loadData('tasks', DBWorker.db.tasks);
                           },
                         ),
                         title: Text(
@@ -145,4 +145,3 @@ class TasksList extends StatelessWidget{
       );
 
 }
-*/

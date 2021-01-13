@@ -3,12 +3,14 @@ import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
 import '../tasks/tasksmodel.dart';
 
-class TasksDBWorker{
+class TasksTable{
 
   Database _db;
 
 
-  TasksDBWorker();
+  TasksTable(Database db){
+    _db = db;
+  }
 
   Future<Database> get _database async{
 
@@ -21,12 +23,24 @@ class TasksDBWorker{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'my1.db');
+    var path = join(utils.docsDir.path, 'myFucking1.db');
     Database db = await openDatabase(
         path,
         version: 1,
         onOpen: (db){},
         onCreate: (Database someDB, int someVersion)async{
+
+          print('Database created!!!!!!!!!!!');
+
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS notes("
+                  "id INTEGER UNIQUE PRIMARY KEY,"
+                  "title TEXT,"
+                  "content TEXT,"
+                  "color TEXT"
+                  ")"
+          );
+
           await someDB.execute(
               "CREATE TABLE IF NOT EXISTS tasks("
                   "id INTEGER UNIQUE PRIMARY KEY,"
@@ -35,6 +49,7 @@ class TasksDBWorker{
                   "dueDate TEXT"
                   ")"
           );
+
         }
     );
 
