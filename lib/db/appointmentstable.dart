@@ -1,16 +1,17 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
-import '../tasks/tasksmodel.dart';
+import 'package:flutter_book/appointments/appointmentsmodel.dart'
+    show theAppointmentsModel, Appointment;
 
-class TasksTable{
+class AppointmentsTable{
 
   Database _db;
 
-
-  TasksTable(Database db){
+  AppointmentsTable(Database db){
     _db = db;
   }
+
 
   Future<Database> get _database async{
 
@@ -66,77 +67,80 @@ class TasksTable{
     return db;
   }
 
-  Task _map2Task(Map someMap){
+  Appointment _map2Appointment(Map someMap){
 
-    Task task = Task();
-    task.id = someMap['id'];
-    task.description = someMap['description'];
-    task.dueDate = someMap['dueDate'];
-    task.completed = someMap['completed'];
+    Appointment appointment = Appointment();
+    appointment.id = someMap['id'];
+    appointment.title = someMap['title'];
+    appointment.description = someMap['description'];
+    appointment.apptDate = someMap['apptDate'];
+    appointment.apptTime = someMap['apptTime'];
 
-    return task;
+    return appointment;
   }
 
-  Map<String, dynamic> _task2Map(Task someTask){
+  Map<String, dynamic> _appointment2Map(Appointment someAppointment){
 
     Map<String, dynamic> map = Map<String, dynamic>();
 
-    map['id'] = someTask.id;
-    map['description'] = someTask.description;
-    map['dueDate'] = someTask.dueDate;
-    map['completed'] = someTask.completed;
+    map['id'] = someAppointment.id;
+    map['title'] = someAppointment.title;
+    map['description'] = someAppointment.description;
+    map['apptDate'] = someAppointment.apptDate;
+    map['apptTime'] = someAppointment.apptTime;
 
 
     return map;
   }
 
-  Future<void> create(Task someTask)async{
+  Future<void> create(Appointment someAppointment)async{
 
     Database db = await _database;
     var val = await db.rawQuery(
-        "SELECT MAX(id) + 1 AS id FROM tasks"
+        "SELECT MAX(id) + 1 AS id FROM appointments"
     );
 
     int id = val.first['id'] == null ? 1 : val.first['id'];
 
     return await db.rawInsert(
-        "INSERT INTO tasks (id, description, completed, dueDate)"
-            "VALUES (?,?,?,?)",
-        [id, someTask.description, someTask.completed, someTask.dueDate]
+        "INSERT INTO appointments (id, title, description, apptDate, apptTime)"
+            "VALUES (?,?,?,?,?)",
+        [id, someAppointment.title, someAppointment.description,
+          someAppointment.apptDate, someAppointment.apptTime]
     );
   }
 
-  Future<Task> get(int someId)async{
+  Future<Appointment> get(int someId)async{
 
     Database db = await _database;
     var resSet = await db.query(
-        'tasks',
+        'appointments',
         where: 'id=?',
         whereArgs: [someId]
     );
 
-    return _map2Task(resSet.first);
+    return _map2Appointment(resSet.first);
   }
 
   Future<List> getAll() async {
 
     Database db = await _database;
     var resSet = await db.query(
-        'tasks'
+        'appointments'
     );
 
     return resSet.isNotEmpty?
-    resSet.map((inputElem)=>_map2Task(inputElem)).toList():[];
+    resSet.map((inputElem)=>_map2Appointment(inputElem)).toList():[];
   }
 
-  Future<void> update(Task someTask) async {
+  Future<void> update(Appointment someAppointment) async {
 
     Database db = await _database;
     return await db.update(
-        'tasks',
-        _task2Map(someTask),
+        'appointments',
+        _appointment2Map(someAppointment),
         where: 'id=?',
-        whereArgs: [someTask.id]
+        whereArgs: [someAppointment.id]
     );
   }
 
@@ -144,10 +148,11 @@ class TasksTable{
 
     Database db = await _database;
     return await db.delete(
-        'tasks',
+        'appointments',
         where: 'id=?',
         whereArgs: [someId]
     );
   }
 
 }
+

@@ -22,7 +22,7 @@ class NotesTable{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'myFucking1.db');
+    var path = join(utils.docsDir.path, 'myFucking2.db');
     Database db = await openDatabase(
       path,
       version: 1,
@@ -46,6 +46,16 @@ class NotesTable{
                 "description TEXT,"
                 "completed TEXT,"
                 "dueDate TEXT"
+                ")"
+        );
+
+        await someDB.execute(
+            "CREATE TABLE IF NOT EXISTS appointments("
+                "id INTEGER PRIMARY KEY,"
+                "title TEXT,"
+                "description TEXT,"
+                "apptDate TEXT,"
+                "apptTime TEXT"
                 ")"
         );
 
