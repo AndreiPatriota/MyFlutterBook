@@ -1,8 +1,6 @@
-import 'package:path/path.dart';
+import 'package:flutter_book/db/dbworker.dart';
 import 'package:sqflite/sqflite.dart';
-import '../utils.dart' as utils;
-import 'package:flutter_book/models/appointmentsmodel.dart'
-    show theAppointmentsModel, Appointment;
+import 'package:flutter_book/models/appointmentsmodel.dart' show Appointment;
 
 class AppointmentsTable{
 
@@ -16,66 +14,12 @@ class AppointmentsTable{
   Future<Database> get _database async{
 
     if(_db == null){
-      _db = await _init();
+      _db = await DBWorker.init();
     }
 
     return _db;
   }
 
-  Future<Database> _init() async{
-
-    var path = join(utils.docsDir.path, 'myFucking4.db');
-    Database db = await openDatabase(
-        path,
-        version: 1,
-        onOpen: (db){},
-        onCreate: (Database someDB, int someVersion)async{
-
-          print('Database created!!!!!!!!!!!');
-
-          await someDB.execute(
-              "CREATE TABLE IF NOT EXISTS notes("
-                  "id INTEGER UNIQUE PRIMARY KEY,"
-                  "title TEXT,"
-                  "content TEXT,"
-                  "color TEXT"
-                  ")"
-          );
-
-          await someDB.execute(
-              "CREATE TABLE IF NOT EXISTS tasks("
-                  "id INTEGER UNIQUE PRIMARY KEY,"
-                  "description TEXT,"
-                  "completed TEXT,"
-                  "dueDate TEXT"
-                  ")"
-          );
-
-          await someDB.execute(
-              "CREATE TABLE IF NOT EXISTS appointments("
-                  "id INTEGER PRIMARY KEY,"
-                  "title TEXT,"
-                  "description TEXT,"
-                  "apptDate TEXT,"
-                  "apptTime TEXT"
-                  ")"
-          );
-
-          await someDB.execute(
-              "CREATE TABLE IF NOT EXISTS contacts("
-                  "id INTEGER PRIMARY KEY,"
-                  "name TEXT,"
-                  "email TEXT,"
-                  "phone TEXT,"
-                  "birthday TEXT"
-                  ")"
-          );
-
-        }
-    );
-
-    return db;
-  }
 
   Appointment _map2Appointment(Map someMap){
 
