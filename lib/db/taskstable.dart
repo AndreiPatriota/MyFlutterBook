@@ -23,7 +23,7 @@ class TasksTable{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'myFucking2.db');
+    var path = join(utils.docsDir.path, 'myFucking4.db');
     Database db = await openDatabase(
         path,
         version: 1,
@@ -57,6 +57,16 @@ class TasksTable{
                   "description TEXT,"
                   "apptDate TEXT,"
                   "apptTime TEXT"
+                  ")"
+          );
+
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS contacts("
+                  "id INTEGER PRIMARY KEY,"
+                  "name TEXT,"
+                  "email TEXT,"
+                  "phone TEXT,"
+                  "birthday TEXT"
                   ")"
           );
 

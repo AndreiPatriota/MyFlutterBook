@@ -22,44 +22,54 @@ class NotesTable{
 
   Future<Database> _init() async{
 
-    var path = join(utils.docsDir.path, 'myFucking2.db');
+    var path = join(utils.docsDir.path, 'myFucking4.db');
     Database db = await openDatabase(
-      path,
-      version: 1,
-      onOpen: (db){},
-      onCreate: (Database someDB, int someVersion)async{
+        path,
+        version: 1,
+        onOpen: (db){},
+        onCreate: (Database someDB, int someVersion)async{
 
-        print('Database created!!!!!!!!!!!');
+          print('Database created!!!!!!!!!!!');
 
-        await someDB.execute(
-          "CREATE TABLE IF NOT EXISTS notes("
-          "id INTEGER UNIQUE PRIMARY KEY,"
-          "title TEXT,"
-          "content TEXT,"
-          "color TEXT"
-              ")"
-        );
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS notes("
+                  "id INTEGER UNIQUE PRIMARY KEY,"
+                  "title TEXT,"
+                  "content TEXT,"
+                  "color TEXT"
+                  ")"
+          );
 
-        await someDB.execute(
-            "CREATE TABLE IF NOT EXISTS tasks("
-                "id INTEGER UNIQUE PRIMARY KEY,"
-                "description TEXT,"
-                "completed TEXT,"
-                "dueDate TEXT"
-                ")"
-        );
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS tasks("
+                  "id INTEGER UNIQUE PRIMARY KEY,"
+                  "description TEXT,"
+                  "completed TEXT,"
+                  "dueDate TEXT"
+                  ")"
+          );
 
-        await someDB.execute(
-            "CREATE TABLE IF NOT EXISTS appointments("
-                "id INTEGER PRIMARY KEY,"
-                "title TEXT,"
-                "description TEXT,"
-                "apptDate TEXT,"
-                "apptTime TEXT"
-                ")"
-        );
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS appointments("
+                  "id INTEGER PRIMARY KEY,"
+                  "title TEXT,"
+                  "description TEXT,"
+                  "apptDate TEXT,"
+                  "apptTime TEXT"
+                  ")"
+          );
 
-      }
+          await someDB.execute(
+              "CREATE TABLE IF NOT EXISTS contacts("
+                  "id INTEGER PRIMARY KEY,"
+                  "name TEXT,"
+                  "email TEXT,"
+                  "phone TEXT,"
+                  "birthday TEXT"
+                  ")"
+          );
+
+        }
     );
 
     return db;
