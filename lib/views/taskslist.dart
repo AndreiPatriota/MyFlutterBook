@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_book/tasks/tasksmodel.dart' show TasksModel, theTasksModel, Task;
+import 'package:flutter_book/models/tasksmodel.dart' show TasksModel, theTasksModel, Task;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';

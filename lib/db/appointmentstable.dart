@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
-import 'package:flutter_book/appointments/appointmentsmodel.dart'
+import 'package:flutter_book/models/appointmentsmodel.dart'
     show theAppointmentsModel, Appointment;
 
 class AppointmentsTable{

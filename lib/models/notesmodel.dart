@@ -1,5 +1,5 @@
-import 'package:flutter_book/notes/notes.dart';
-import '../basemodel.dart' show BaseModel;
+import 'package:flutter_book/views/notes.dart';
+import 'basemodel.dart' show BaseModel;
 import '../db/dbworker.dart';
 
 class Note{

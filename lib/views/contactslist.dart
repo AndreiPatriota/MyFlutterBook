@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_book/contacts/contactsmodel.dart';
+import 'package:flutter_book/models/contactsmodel.dart';
 import 'package:flutter_book/db/dbworker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../utils.dart' as utils;
 import 'package:path/path.dart';
-import 'contactsmodel.dart' show Contact, ContactsModel, theContactsModel;
+import '../models/contactsmodel.dart' show Contact, ContactsModel, theContactsModel;
 
 class ContactsList extends StatelessWidget{
 

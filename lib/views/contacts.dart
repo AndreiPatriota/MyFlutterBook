@@ -3,7 +3,7 @@ import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'contactslist.dart';
 import 'contactsentry.dart';
-import 'contactsmodel.dart' show ContactsModel, theContactsModel;
+import '../models/contactsmodel.dart' show ContactsModel, theContactsModel;
 
 class Contacts extends StatelessWidget{
 

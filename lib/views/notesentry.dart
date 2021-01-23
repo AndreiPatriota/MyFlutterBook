@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../db/dbworker.dart';
-import 'notesmodel.dart' show NotesModel, theNotesModel;
+import '../models/notesmodel.dart' show NotesModel, theNotesModel;
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 
 class NotesEntry extends StatelessWidget{

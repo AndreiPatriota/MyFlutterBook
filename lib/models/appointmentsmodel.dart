@@ -1,4 +1,4 @@
-import 'package:flutter_book/basemodel.dart';
+import 'package:flutter_book/models/basemodel.dart';
 
 class Appointment{
 

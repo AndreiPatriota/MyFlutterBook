@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/db/dbworker.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'tasksmodel.dart' show TasksModel, theTasksModel;
+import '../models/tasksmodel.dart' show TasksModel, theTasksModel;
 import '../utils.dart' show selectDate;
 
 class TasksEntry extends StatelessWidget{

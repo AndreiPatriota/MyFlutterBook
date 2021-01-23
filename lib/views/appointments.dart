@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 import 'appointmentslist.dart';
 import 'appointmentsentry.dart';
-import 'appointmentsmodel.dart' show AppointmentsModel, theAppointmentsModel;
+import '../models/appointmentsmodel.dart' show AppointmentsModel, theAppointmentsModel;
 
 class Appointments extends StatelessWidget{
 

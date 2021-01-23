@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../db/dbworker.dart';
 import '../utils.dart';
-import 'contactsmodel.dart' show ContactsModel, theContactsModel;
+import '../models/contactsmodel.dart' show ContactsModel, theContactsModel;
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 import 'package:flutter_book/utils.dart' as utils;
 import 'package:path/path.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_book/tasks/tasksmodel.dart';
+import 'package:flutter_book/models/tasksmodel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'notesmodel.dart' show Note, NotesModel, theNotesModel;
+import '../models/notesmodel.dart' show Note, NotesModel, theNotesModel;
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 
 class NotesList extends StatelessWidget {

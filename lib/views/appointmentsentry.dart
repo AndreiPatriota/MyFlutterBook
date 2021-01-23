@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 import 'package:scoped_model/scoped_model.dart';
-import 'appointmentsmodel.dart' show AppointmentsModel, theAppointmentsModel;
+import '../models/appointmentsmodel.dart' show AppointmentsModel, theAppointmentsModel;
 import '../utils.dart' show selectDate;
 
 class AppointmentsEntry extends StatelessWidget{

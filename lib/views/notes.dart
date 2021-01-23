@@ -5,7 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../db/notestable.dart';
 import 'noteslist.dart';
 import 'notesentry.dart';
-import 'notesmodel.dart' show NotesModel, theNotesModel;
+import '../models/notesmodel.dart' show NotesModel, theNotesModel;
 
 class Notes extends StatelessWidget{
 

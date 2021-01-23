@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../db/taskstable.dart';
 import 'taskslist.dart';
 import 'tasksentry.dart';
-import 'tasksmodel.dart' show TasksModel, theTasksModel;
+import '../models/tasksmodel.dart' show TasksModel, theTasksModel;
 import '../db/dbworker.dart';
 
 class Tasks extends StatelessWidget{

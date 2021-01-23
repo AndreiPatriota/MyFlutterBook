@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
-import '../contacts/contactsmodel.dart';
+import '../models/contactsmodel.dart';
 
 class ContactsTable{
 

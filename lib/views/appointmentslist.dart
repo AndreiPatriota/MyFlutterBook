@@ -6,7 +6,7 @@ import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'appointmentsmodel.dart' show theAppointmentsModel, AppointmentsModel, Appointment;
+import '../models/appointmentsmodel.dart' show theAppointmentsModel, AppointmentsModel, Appointment;
 import 'package:flutter_book/db/dbworker.dart' show DBWorker;
 
 class AppointmentsList extends StatelessWidget {

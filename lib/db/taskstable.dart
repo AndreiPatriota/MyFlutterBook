@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../utils.dart' as utils;
-import '../tasks/tasksmodel.dart';
+import '../models/tasksmodel.dart';
 
 class TasksTable{
 

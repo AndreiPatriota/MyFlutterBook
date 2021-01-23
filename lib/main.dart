@@ -1,10 +1,10 @@
 import "dart:io";
 import "package:path_provider/path_provider.dart";
 import 'package:flutter/material.dart';
-import "appointments/appointments.dart";
-import "contacts/contacts.dart";
-import "notes/notes.dart";
-import "tasks/tasks.dart";
+import 'views/appointments.dart';
+import 'views/contacts.dart';
+import 'views/notes.dart';
+import 'views/tasks.dart';
 import "utils.dart" as utils;
 
 void main(){
