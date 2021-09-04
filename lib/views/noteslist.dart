@@ -44,7 +44,8 @@ class NotesList extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) => ScopedModel<NotesModel>(
+  Widget build(BuildContext context) =>
+      ScopedModel<NotesModel>(
         model: theNotesModel,
         child: ScopedModelDescendant<NotesModel>(
             builder: (BuildContext someContext, Widget someChild,
@@ -58,6 +59,8 @@ class NotesList extends StatelessWidget {
                     onPressed: () {
                       var newNote = Note();
 
+                      /*Initializes a new Note object, and changes
+                      to the entry note screen*/
                       someModel.entityBeingEdited = newNote;
                       someModel.color = null;
                       someModel.stackIndex = 1;
@@ -66,8 +69,8 @@ class NotesList extends StatelessWidget {
                   body: ListView.builder(
                       itemCount: someModel.entityList.length,
                       itemBuilder: (BuildContext someContext, int someIndex) {
-                        Note oneNote = theNotesModel.entityList[someIndex];
 
+                        Note oneNote = theNotesModel.entityList[someIndex];
                         Color oneColor = Colors.white;
 
                         switch (oneNote.color) {

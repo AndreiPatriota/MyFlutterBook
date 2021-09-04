@@ -43,7 +43,6 @@ class NotesModel extends BaseModel{
 
   String _color;
 
-
   NotesModel(){
     this.stackIndex = 0;
     this.entityBeingEdited = Note();
